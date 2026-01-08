@@ -1,7 +1,7 @@
 
 {
-  "name": "DKV Dentisalud - Agente Exclusivo",
-  "description": "Una aplicación web premium para el seguro dental DKV, con comparador de precios, buscador de clínicas y asesoría personalizada.",
+  "name": "DKV Dental Landing Page",
+  "description": "A high-conversion landing page for DKV Dental Insurance, featuring pricing tables, clinic finder, and lead capture forms.",
   "requestFramePermissions": [
     "geolocation"
   ]

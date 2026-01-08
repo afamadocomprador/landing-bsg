@@ -1,16 +1,22 @@
 
-export interface Clinic {
+export interface PlanFeature {
+  text: string;
+  isStrong?: boolean;
+}
+
+export interface Plan {
   id: string;
   name: string;
-  address: string;
-  city: string;
-  phone: string;
-  imageUrl: string;
-  specialties: string[];
+  price: string;
+  pricePeriod: string;
+  priceLabel: string;
+  features: PlanFeature[];
+  buttonText: string;
+  isPopular?: boolean;
+  accentColor: string;
 }
 
 export interface Testimonial {
-  id: string;
   initials: string;
   name: string;
   rating: number;

@@ -1,98 +1,105 @@
 
 import React, { useState } from 'react';
-import { CLINICS } from '../constants';
 
 const ClinicFinder: React.FC = () => {
-  const [query, setQuery] = useState('');
-  const [showResults, setShowResults] = useState(false);
-
-  const filteredClinics = CLINICS.filter(c => 
-    c.city.toLowerCase().includes(query.toLowerCase()) || 
-    c.name.toLowerCase().includes(query.toLowerCase())
-  );
+  const [step, setStep] = useState(1);
+  const [formData, setFormData] = useState({
+    provincia: '',
+    localidad: '',
+    cp: ''
+  });
 
   return (
-    <section id="clinicas" className="py-20 bg-white">
-      <div className="container mx-auto px-5 max-w-5xl">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
-          <div>
-            <h2 className="text-secondary text-3xl md:text-4xl font-extrabold leading-tight tracking-tight mb-6 uppercase">
+    <section className="py-20 bg-white" id="finder">
+      <div className="max-w-6xl mx-auto px-4">
+        <div className="flex flex-col md:flex-row gap-12 items-center">
+          <div className="flex-1">
+            <h2 className="text-3xl md:text-4xl font-extrabold text-dkv-forest uppercase tracking-tight mb-6">
               Encuentra tu Clínica Dental DKV más cercana
             </h2>
-            <p className="text-neutral-dkv text-lg mb-10 leading-relaxed">
-              Accede a nuestra amplia red de centros propios y especialistas concertados. Encuentra tu centro DKV Dentisalud filtrando por ubicación.
+            <p className="text-dkv-neutral text-lg mb-8 leading-relaxed">
+              Accede a nuestra amplia red de clínicas y especialistas. Completa los pasos para ver los centros disponibles en tu zona.
             </p>
-            
-            <div className="bg-soft-bg border border-border-dkv rounded-xl p-8 shadow-sm">
-              <div className="flex flex-col gap-6">
-                <div className="flex flex-col gap-2">
-                  <label className="text-secondary text-xs font-bold uppercase tracking-widest">Provincia o Ciudad</label>
-                  <div className="relative">
-                    <input 
-                      type="text" 
-                      value={query}
-                      onChange={(e) => setQuery(e.target.value)}
-                      placeholder="Introduce provincia o ciudad..."
-                      className="w-full h-14 pl-12 pr-4 bg-white border border-border-dkv rounded-md text-base focus:ring-primary focus:border-primary"
-                    />
-                    <span className="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-primary">search</span>
-                  </div>
-                </div>
-                
-                <button 
-                  onClick={() => setShowResults(true)}
-                  className="w-full h-14 bg-primary hover:bg-[#728500] text-white text-base font-bold uppercase tracking-widest rounded-md shadow-lg transition-all"
-                >
-                  &gt; Buscar Clínicas
-                </button>
+            <div className="flex flex-col sm:flex-row gap-8">
+              <div className="flex items-center gap-3">
+                <span className="material-symbols-outlined text-dkv-lime text-3xl">location_on</span>
+                <span className="text-xs font-bold uppercase tracking-widest text-dkv-neutral">Cobertura Nacional</span>
               </div>
-            </div>
-
-            <div className="mt-8 flex flex-wrap gap-6 justify-center lg:justify-start">
-              <div className="flex items-center gap-2 text-neutral-dkv font-bold text-xs uppercase">
-                <span className="material-symbols-outlined text-primary">public</span>
-                Cobertura Nacional
-              </div>
-              <div className="flex items-center gap-2 text-neutral-dkv font-bold text-xs uppercase">
-                <span className="material-symbols-outlined text-primary">verified_user</span>
-                Centros Homologados
+              <div className="flex items-center gap-3">
+                <span className="material-symbols-outlined text-dkv-lime text-3xl">verified_user</span>
+                <span className="text-xs font-bold uppercase tracking-widest text-dkv-neutral">Centros Homologados</span>
               </div>
             </div>
           </div>
 
-          <div className={`space-y-6 ${showResults ? 'opacity-100' : 'opacity-40 pointer-events-none'}`}>
-            <h3 className="text-secondary text-xl font-bold uppercase mb-4">
-              {showResults ? `Resultados (${filteredClinics.length})` : 'Clínicas destacadas'}
-            </h3>
-            
-            <div className="space-y-4 max-h-[500px] overflow-y-auto pr-2 custom-scrollbar">
-              {(showResults ? filteredClinics : CLINICS.slice(0, 2)).map((clinic) => (
-                <div key={clinic.id} className="bg-white border border-border-dkv rounded-lg overflow-hidden flex flex-col sm:flex-row shadow-sm hover:shadow-md transition-all">
-                  <div className="w-full sm:w-40 h-40 shrink-0">
-                    <img src={clinic.imageUrl} alt={clinic.name} className="w-full h-full object-cover" />
-                  </div>
-                  <div className="p-5 flex flex-col justify-between">
-                    <div>
-                      <h4 className="text-secondary font-bold text-lg mb-1">{clinic.name}</h4>
-                      <p className="text-neutral-dkv text-sm flex items-center gap-2">
-                        <span className="material-symbols-outlined text-sm text-primary">location_on</span>
-                        {clinic.address}, {clinic.city}
-                      </p>
-                      <div className="flex flex-wrap gap-2 mt-3">
-                        {clinic.specialties.map(s => (
-                          <span key={s} className="bg-soft-bg text-secondary text-[10px] font-bold uppercase px-2 py-1 rounded border border-border-dkv">
-                            {s}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                    <a href={`tel:${clinic.phone}`} className="mt-4 text-primary font-bold text-sm uppercase flex items-center gap-2 hover:underline">
-                      <span className="material-symbols-outlined text-lg">call</span>
-                      {clinic.phone}
-                    </a>
-                  </div>
+          <div className="w-full md:w-[450px]">
+            <div className="bg-dkv-bg border border-dkv-border rounded-xl p-8 shadow-sm">
+              <form className="space-y-6">
+                {/* Step 1 */}
+                <div className={`space-y-2 transition-opacity ${step < 1 ? 'opacity-40' : 'opacity-100'}`}>
+                  <label className="flex items-center gap-2 text-dkv-forest text-[11px] font-bold uppercase tracking-widest">
+                    <span className="flex items-center justify-center w-5 h-5 rounded-full bg-dkv-forest text-white text-[10px]">1</span>
+                    PROVINCIA
+                  </label>
+                  <select 
+                    className="w-full h-14 px-4 bg-white border border-dkv-border rounded text-sm focus:ring-2 focus:ring-dkv-lime focus:border-dkv-lime outline-none transition-all appearance-none cursor-pointer"
+                    value={formData.provincia}
+                    onChange={(e) => {
+                      setFormData({...formData, provincia: e.target.value});
+                      setStep(2);
+                    }}
+                  >
+                    <option value="">Selecciona tu Provincia</option>
+                    <option value="madrid">Madrid</option>
+                    <option value="barcelona">Barcelona</option>
+                    <option value="valencia">Valencia</option>
+                    <option value="sevilla">Sevilla</option>
+                  </select>
                 </div>
-              ))}
+
+                {/* Step 2 */}
+                <div className={`space-y-2 transition-opacity ${step < 2 ? 'opacity-40 pointer-events-none' : 'opacity-100'}`}>
+                  <label className="flex items-center gap-2 text-dkv-forest text-[11px] font-bold uppercase tracking-widest">
+                    <span className="flex items-center justify-center w-5 h-5 rounded-full bg-dkv-forest/20 text-dkv-forest text-[10px]">2</span>
+                    LOCALIDAD
+                  </label>
+                  <select 
+                    className="w-full h-14 px-4 bg-white border border-dkv-border rounded text-sm focus:ring-2 focus:ring-dkv-lime focus:border-dkv-lime outline-none transition-all disabled:bg-dkv-border/30 disabled:cursor-not-allowed"
+                    disabled={step < 2}
+                    value={formData.localidad}
+                    onChange={(e) => {
+                      setFormData({...formData, localidad: e.target.value});
+                      setStep(3);
+                    }}
+                  >
+                    <option value="">Selecciona tu Localidad</option>
+                    <option value="centro">Centro</option>
+                    <option value="periferia">Área Metropolitana</option>
+                  </select>
+                </div>
+
+                {/* Step 3 */}
+                <div className={`space-y-2 transition-opacity ${step < 3 ? 'opacity-40 pointer-events-none' : 'opacity-100'}`}>
+                  <label className="flex items-center gap-2 text-dkv-forest text-[11px] font-bold uppercase tracking-widest">
+                    <span className="flex items-center justify-center w-5 h-5 rounded-full bg-dkv-forest/20 text-dkv-forest text-[10px]">3</span>
+                    CÓDIGO POSTAL
+                  </label>
+                  <input 
+                    type="text" 
+                    placeholder="Introduce tu Código Postal"
+                    className="w-full h-14 px-4 bg-white border border-dkv-border rounded text-sm focus:ring-2 focus:ring-dkv-lime focus:border-dkv-lime outline-none transition-all disabled:bg-dkv-border/30"
+                    disabled={step < 3}
+                    onChange={(e) => setFormData({...formData, cp: e.target.value})}
+                  />
+                </div>
+
+                <button 
+                  type="button"
+                  className="w-full h-14 bg-dkv-lime hover:bg-dkv-forest text-white font-bold uppercase tracking-widest rounded shadow-md transition-all duration-300"
+                >
+                  &rsaquo; BUSCAR CLÍNICAS DKV
+                </button>
+              </form>
             </div>
           </div>
         </div>

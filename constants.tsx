@@ -1,75 +1,75 @@
 
-import { Clinic, Testimonial, FAQItem } from './types';
+import { Plan, Testimonial, FAQItem } from './types';
 
-export const CLINICS: Clinic[] = [
+export const PLANS: Plan[] = [
   {
-    id: '1',
-    name: 'Clínica Dental DKV Milenium',
-    address: 'C/ Velázquez, 45',
-    city: 'Madrid',
-    phone: '91 234 56 78',
-    imageUrl: 'https://picsum.photos/id/43/600/400',
-    specialties: ['General', 'Ortodoncia']
+    id: 'classic',
+    name: 'DKV Dentisalud Classic',
+    price: '8€',
+    pricePeriod: '/mes',
+    priceLabel: 'Precio Inicial',
+    features: [
+      { text: 'Hasta 59 tratamientos gratuitos incluidos', isStrong: true },
+      { text: 'Limpieza dental anual gratis', isStrong: true },
+      { text: 'Acceso a red odontológica DKV' },
+    ],
+    buttonText: 'Contratar DKV Classic',
+    accentColor: 'dkv-lime',
   },
   {
-    id: '2',
-    name: 'Espacio de Salud DKV',
-    address: 'Av. Diagonal, 500',
-    city: 'Barcelona',
-    phone: '93 456 78 90',
-    imageUrl: 'https://picsum.photos/id/50/600/400',
-    specialties: ['Implantes', 'Odontopediatría']
+    id: 'elite',
+    name: 'DKV Dentisalud Élite',
+    price: '15€',
+    pricePeriod: '/mes',
+    priceLabel: 'Precio Inicial',
+    features: [
+      { text: 'Todo incluido en plan Classic', isStrong: true },
+      { text: 'Seguro dental sin carencia (uso inmediato)', isStrong: true },
+      { text: 'Grandes descuentos en implantes y ortodoncia', isStrong: true },
+      { text: 'Niños gratis (menores de 14)' },
+    ],
+    buttonText: 'Contratar DKV Élite',
+    isPopular: true,
+    accentColor: 'dkv-lime',
   },
-  {
-    id: '3',
-    name: 'Centro Odontológico DKV',
-    address: 'Gran Vía, 12',
-    city: 'Bilbao',
-    phone: '94 456 12 34',
-    imageUrl: 'https://picsum.photos/id/55/600/400',
-    specialties: ['Estética', 'Periodoncia']
-  }
 ];
 
 export const TESTIMONIALS: Testimonial[] = [
   {
-    id: '1',
     initials: 'MG',
-    name: 'María G.',
+    name: 'MARÍA G.',
     rating: 5,
-    text: 'La atención del Agente Exclusivo fue impecable. Me explicó perfectamente las ventajas y coberturas del seguro.'
+    text: '“La atención del Agente Exclusivo fue impecable. Me explicó perfectamente las ventajas y coberturas del seguro.”',
   },
   {
-    id: '2',
     initials: 'CR',
-    name: 'Carlos R.',
+    name: 'CARLOS R.',
     rating: 5,
-    text: 'Contraté DKV Dentisalud para toda la familia. Los descuentos en tratamientos importantes se notan mucho.'
+    text: '“Contraté DKV Dentisalud para toda la familia. Los descuentos en tratamientos importantes se notan mucho.”',
   },
   {
-    id: '3',
     initials: 'LP',
-    name: 'Laura P.',
+    name: 'LAURA P.',
     rating: 4.5,
-    text: 'Muy rápido y sin papeleos. Pude ir al dentista al día siguiente gracias a que no tiene carencia.'
-  }
+    text: '“Muy rápido y sin papeleos. Pude ir al dentista al día siguiente gracias a que no tiene carencia.”',
+  },
 ];
 
 export const FAQS: FAQItem[] = [
   {
-    question: '¿Cómo funciona el seguro dental de DKV?',
-    answer: 'El seguro dental DKV funciona mediante el acceso a una amplia red de clínicas concertadas. Solo tienes que elegir la clínica que prefieras, pedir cita y presentar tu tarjeta digital DKV.'
+    question: '¿CÓMO FUNCIONA EL SEGURO DENTAL DE DKV?',
+    answer: 'El seguro dental DKV funciona mediante el acceso a una amplia red de clínicas concertadas. Solo tienes que elegir la clínica que prefieras, pedir cita y presentar tu tarjeta digital DKV. Tienes acceso a más de 50 tratamientos gratuitos y el resto con importantes descuentos sobre el precio de mercado.',
   },
   {
-    question: '¿El seguro dental DKV cubre endodoncia?',
-    answer: 'Sí, el seguro cubre endodoncias. Aunque no es un tratamiento gratuito, disfrutas de un precio franquiciado muy reducido en comparación con el coste privado habitual.'
+    question: '¿EL SEGURO DENTAL DKV CUBRE ENDODONCIA?',
+    answer: 'Sí, el seguro cubre endodoncias. Aunque no es un tratamiento gratuito, disfrutas de un precio franquiciado muy reducido en comparación con el coste privado habitual, garantizando un ahorro significativo.',
   },
   {
-    question: '¿Tiene algún periodo de carencia?',
-    answer: 'No, el seguro dental DKV Dentisalud no tiene periodos de carencia. Puedes utilizar todos los servicios desde el primer día de contratación.'
+    question: '¿TIENE ALGÚN PERIODO DE CARENCIA?',
+    answer: 'No, el seguro dental DKV Dentisalud no tiene periodos de carencia. Puedes utilizar todos los servicios, incluidos los tratamientos gratuitos y con descuento, desde el primer día de contratación.',
   },
   {
-    question: '¿Puedo elegir cualquier dentista?',
-    answer: 'Sí, siempre que esté dentro del Cuadro Médico de DKV. Dispones de una red nacional con más de 1.500 clínicas para elegir.'
-  }
+    question: '¿PUEDO ELEGIR CUALQUIER DENTISTA?',
+    answer: 'Sí, siempre que esté dentro del Cuadro Médico de DKV. Dispones de una red nacional con más de 1.500 clínicas y 2.000 odontólogos para elegir el que más te convenga.',
+  },
 ];
