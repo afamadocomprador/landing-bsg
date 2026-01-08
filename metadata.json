@@ -1,0 +1,8 @@
+
+{
+  "name": "DKV Dentisalud - Agente Exclusivo",
+  "description": "Una aplicación web premium para el seguro dental DKV, con comparador de precios, buscador de clínicas y asesoría personalizada.",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
