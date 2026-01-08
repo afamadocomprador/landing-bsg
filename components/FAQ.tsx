@@ -1,46 +1,42 @@
 
-import React, { useState } from 'react';
-import { FAQS } from '../constants';
+import React from 'react';
 
 const FAQ: React.FC = () => {
-  const [openIdx, setOpenIdx] = useState<number | null>(null);
-
   return (
-    <section className="py-20 bg-white">
-      <div className="max-w-3xl mx-auto px-4">
-        <h2 className="text-3xl md:text-4xl font-extrabold text-dkv-forest uppercase tracking-tight mb-12 leading-tight">
+    <section className="py-10 bg-white">
+      <div className="px-5 max-w-lg mx-auto w-full">
+        <h2 className="text-secondary text-[26px] font-extrabold leading-tight tracking-tight mb-8 uppercase">
           Preguntas Frecuentes sobre tu Seguro Dental DKV
         </h2>
-        <div className="space-y-4">
-          {FAQS.map((faq, idx) => (
-            <div 
-              key={idx} 
-              className="border border-dkv-border rounded-lg overflow-hidden bg-dkv-bg/40"
-            >
-              <button 
-                onClick={() => setOpenIdx(openIdx === idx ? null : idx)}
-                className="w-full flex items-center justify-between p-5 text-left transition-colors hover:bg-dkv-bg"
-              >
-                <span className="text-dkv-forest text-sm font-extrabold uppercase tracking-wide pr-4">
-                  {faq.question}
-                </span>
-                <span className={`material-symbols-outlined text-dkv-lime transition-transform duration-300 ${openIdx === idx ? 'rotate-180' : ''}`}>
-                  expand_more
-                </span>
-              </button>
-              <div 
-                className={`transition-all duration-300 overflow-hidden ${openIdx === idx ? 'max-h-96 opacity-100 p-5 pt-0' : 'max-h-0 opacity-0'}`}
-              >
-                <p className="text-dkv-neutral text-sm leading-relaxed border-t border-dkv-border pt-4">
-                  {faq.answer}
-                </p>
-              </div>
-            </div>
-          ))}
+        <div className="flex flex-col gap-4">
+          <FAQItem 
+            question="¿Cómo funciona el seguro dental de DKV?"
+            answer="El seguro dental DKV funciona mediante el acceso a una amplia red de clínicas concertadas. Solo tienes que elegir la clínica que prefieras, pedir cita y presentar tu tarjeta digital DKV."
+          />
+          <FAQItem 
+            question="¿El seguro dental DKV cubre endodoncia?"
+            answer="Sí, el seguro cubre endodoncias. Aunque no es un tratamiento gratuito, disfrutas de un precio franquiciado muy reducido."
+          />
+          <FAQItem 
+            question="¿Tiene algún periodo de carencia?"
+            answer="No, el seguro dental DKV Dentisalud no tiene periodos de carencia. Puedes utilizar todos los servicios desde el primer día."
+          />
         </div>
       </div>
     </section>
   );
 };
+
+const FAQItem: React.FC<{ question: string; answer: string }> = ({ question, answer }) => (
+  <details className="group bg-[#f8f8f5] rounded border border-[#e5e7da] overflow-hidden">
+    <summary className="flex items-center justify-between p-4 cursor-pointer select-none">
+      <h3 className="text-secondary text-sm font-bold uppercase pr-4">{question}</h3>
+      <span className="material-symbols-outlined text-primary transition-transform duration-300 group-open:rotate-180">expand_more</span>
+    </summary>
+    <div className="px-4 pb-4 text-[#6A625A] text-sm leading-relaxed border-t border-[#e5e7da] pt-3">
+      {answer}
+    </div>
+  </details>
+);
 
 export default FAQ;

@@ -1,51 +1,41 @@
 
 import React from 'react';
-import { TESTIMONIALS } from '../constants';
 
 const Testimonials: React.FC = () => {
   return (
-    <section className="py-20 bg-dkv-bg overflow-hidden">
-      <div className="max-w-6xl mx-auto px-4">
-        <h2 className="text-3xl md:text-4xl font-extrabold text-dkv-forest uppercase tracking-tight mb-12 text-center leading-tight">
-          Lo que dicen nuestros clientes: Tu sonrisa, su mejor opinión
+    <section className="py-12 bg-[#f8f8f5] overflow-hidden">
+      <div className="px-5 max-w-lg mx-auto w-full flex flex-col gap-6">
+        <h2 className="text-secondary text-[26px] font-extrabold leading-tight tracking-tight uppercase text-center">
+          Lo que dicen nuestros clientes
         </h2>
-        
-        <div className="flex gap-6 overflow-x-auto pb-10 scrollbar-hide snap-x snap-mandatory">
-          {TESTIMONIALS.map((t, i) => (
-            <div 
-              key={i} 
-              className="min-w-[300px] md:min-w-[380px] bg-white p-8 rounded-xl border border-dkv-border shadow-sm snap-center flex flex-col gap-5 hover:shadow-lg transition-shadow"
-            >
-              <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-full bg-dkv-lime/10 flex items-center justify-center font-extrabold text-dkv-forest text-sm">
-                  {t.initials}
-                </div>
-                <div>
-                  <h4 className="text-dkv-forest font-extrabold text-xs uppercase tracking-widest">{t.name}</h4>
-                  <div className="flex text-yellow-500">
-                    {Array.from({ length: 5 }).map((_, idx) => (
-                      <span key={idx} className="material-symbols-outlined text-sm fill-current">
-                        {idx < Math.floor(t.rating) ? 'star' : (idx < t.rating ? 'star_half' : 'star_outline')}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-              <p className="text-dkv-neutral text-sm italic leading-relaxed">
-                {t.text}
-              </p>
-            </div>
-          ))}
+        <div className="flex overflow-x-auto gap-4 pb-6 snap-x snap-mandatory -mx-5 px-5 scrollbar-hide">
+          <TestimonialCard initial="MG" name="María G." text="La atención del Agente Exclusivo fue impecable. Me explicó perfectamente las ventajas y coberturas." />
+          <TestimonialCard initial="CR" name="Carlos R." text="Contraté DKV Dentisalud para toda la familia. Los descuentos en tratamientos se notan mucho." />
+          <TestimonialCard initial="LP" name="Laura P." text="Muy rápido y sin papeleos. Pude ir al dentista al día siguiente gracias a que no tiene carencia." />
         </div>
-
-        <div className="flex justify-center mt-4">
-          <button className="h-12 px-8 flex items-center justify-center border-2 border-dkv-lime text-dkv-lime font-bold uppercase tracking-wide text-xs rounded hover:bg-dkv-lime hover:text-white transition-all duration-300">
-            &rsaquo; VER TODAS LAS OPINIONES
-          </button>
-        </div>
+        <button className="w-full h-12 flex items-center justify-center border border-primary text-primary hover:bg-primary hover:text-white text-sm font-bold uppercase tracking-wide rounded transition-colors">
+          &gt; Ver todas las opiniones
+        </button>
       </div>
     </section>
   );
 };
+
+const TestimonialCard: React.FC<{ initial: string, name: string, text: string }> = ({ initial, name, text }) => (
+  <div className="min-w-[280px] bg-white p-5 rounded border border-[#e5e7da] shadow-sm snap-center flex flex-col gap-4">
+    <div className="flex items-center gap-3">
+      <div className="w-10 h-10 rounded-full bg-[#dceebb] text-secondary flex items-center justify-center font-bold text-sm">
+        {initial}
+      </div>
+      <div>
+        <span className="text-secondary text-xs font-bold uppercase block">{name}</span>
+        <div className="flex text-[#FFC107]">
+          {[...Array(5)].map((_, i) => <span key={i} className="material-symbols-outlined text-[18px] fill-current">star</span>)}
+        </div>
+      </div>
+    </div>
+    <p className="text-[#6A625A] text-sm italic leading-relaxed">"{text}"</p>
+  </div>
+);
 
 export default Testimonials;

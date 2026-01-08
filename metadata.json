@@ -1,7 +1,7 @@
 
 {
-  "name": "DKV Dental Landing Page",
-  "description": "A high-conversion landing page for DKV Dental Insurance, featuring pricing tables, clinic finder, and lead capture forms.",
+  "name": "DKV Dental - Sonrisa Perfecta",
+  "description": "Aplicación de seguros dentales DKV con buscador de clínicas integrado y diseño premium.",
   "requestFramePermissions": [
     "geolocation"
   ]
