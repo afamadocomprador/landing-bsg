@@ -13,7 +13,7 @@ const Header: React.FC = () => {
           {/* Official Corporate Branding Image */}
           <div className="flex items-center h-11">
             <img 
-              src="/logo-agente-dkv.png"" 
+              src="/logo-agente-dkv.png" 
               alt="DKV Agente Exclusivo" 
               className="h-full w-auto object-contain"
               onError={(e) => {
